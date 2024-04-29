@@ -2,6 +2,7 @@ from opencorn import Unicorn, parse_capture
 from time import sleep, time
 
 # sudo rfcomm bind rfcomm0 60:B6:47:E1:26:06
+# https://alberand.com/hc-05-linux.html
 
 with Unicorn('/dev/rfcomm0') as device:
     device.SetDigitalOutputs(0)
