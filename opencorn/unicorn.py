@@ -2,13 +2,37 @@ from serial import Serial
 from helpers import DeviceInformation
 from led_chksums import led_chksums
 from helpers import parse_capture
-
+from bluetooth import get_paired_devices, connect_socket
 
 class Unicorn():
 
-    def __init__(self, port_dev, **kwargs) -> None:
-        self._port_dev = port_dev
-        self._serial = Serial(self._port_dev, **kwargs)
+    def __init__(self, *, dev_port:str = None, dev_mac:str = None, dev_name:str = None, **kwargs) -> None:
+        if dev_port:
+            self._serial = Serial(dev_port, **kwargs)
+        elif dev_mac:
+            self._serial = connect_socket(dev_mac)
+        else:
+            if dev_name:
+                for name, mac, port in get_paired_devices(filter_names=False):
+                    if name == dev_name:
+                        if port:
+                            self._serial = Serial(port, **kwargs)
+                        else:
+                            self._serial = connect_socket(mac)
+                        print(f'Connected to {name} ({mac}) {port or ''}')
+                        break
+                else:
+                    raise ValueError(f'Device {dev_name} not found, use opencorn.bluetooth.get_paired_devices(filter_names=False) to show available devices')
+            else:
+                name, mac, port = get_paired_devices(filter_names=True)[0]
+                if port:
+                    self._serial = Serial(port, **kwargs)
+                else:
+                    self._serial = connect_socket(mac)
+                print(f'Connected to {name} ({mac}) {port or ''}')
+
+
+
 
     def close(self):
         self._serial.close()

@@ -4,7 +4,7 @@ from time import sleep, time
 # sudo rfcomm bind rfcomm0 60:B6:47:E1:26:06
 # https://alberand.com/hc-05-linux.html
 
-with Unicorn('/dev/rfcomm0') as device:
+with Unicorn() as device:
     device.SetDigitalOutputs(0)
     for i in [0,1,2,3,4,5,6,7,6,5,4,3,2,1,0]:
         device.SetDigitalOutputs(1<<i)
