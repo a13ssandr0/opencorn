@@ -81,9 +81,9 @@ The constructor `Unicorn()` supports arguments to select to which device should 
 | Unicorn(dev_name='UN-2023.06.03')    | Connect to the device with the provided name                        |
 
 ### Getting the list of the available devices
-`Unicorn()` and `Unicorn(dev_name='...')` internally call a the method `get_paired_devices(filter_names: bool = True)` that handles the system api calls to get the list of serial devices already paired.
+`Unicorn()` and `Unicorn(dev_name='...')` internally call the method `get_paired_devices(filter_names: bool = True)` that handles the system api calls to get the list of serial devices already paired.
 
-The parameter `filter_names` (enabled for `Unicorn()` and disabled `Unicorn(dev_name='...')`) enables the filter to only get the devices which name starts with "UN-".
+The parameter `filter_names` (enabled for `Unicorn()` and disabled `Unicorn(dev_name='...')`) enables the filter to only get those devices which name starts with "UN-".
 
 If you need to get the list of the devices you can import the method from the internal bluetooth library
 ```python
