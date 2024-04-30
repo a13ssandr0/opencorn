@@ -4,6 +4,16 @@ Open-source Python library for [g.tec Unicorn Hybrid Black](https://www.gtec.at/
 
 ![](https://www.gtec.at/wp-content/uploads/2023/09/unicorn-hybrid-black-bundle.jpg)
 
+## Installing
+### Requirements
+#### Linux
+```sh
+sudo apt install python3-serial python3-gi python3-gi-cairo gir1.2-gtk-4.0
+```
+#### Windows
+- Python (with pip)
+- `pip install pywin32`
+
 ## Usage
 
 ### Import
