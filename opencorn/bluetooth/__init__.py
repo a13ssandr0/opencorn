@@ -2,13 +2,18 @@ import os
 from socket import socket, AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM
 
 if os.name == 'nt':
-    from bt_win import get_paired_devices
+    from .bt_win import get_paired_devices
 elif os.name == 'posix':
-    from bt_linux import get_paired_devices
+    from .bt_linux import get_paired_devices
 else:
     def get_paired_devices(_=True) -> list[tuple[str, str, str]]:
         raise NotImplementedError(f'Device discovery is not supported on your system ({os.name})')
 
+socket.read = socket.recv
+socket.write = socket.send
+def flush(self): pass
+socket.flush = flush
+del flush
 
 def connect_socket(dev_addr: str):
     # Establish connection and setup serial communication

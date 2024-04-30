@@ -7,8 +7,8 @@ __all__ = [
 ]
 
 
-from typing import NamedTuple
 from enum import IntEnum
+from typing import NamedTuple
 
 
 class DeviceInformation():

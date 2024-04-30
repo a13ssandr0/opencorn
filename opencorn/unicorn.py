@@ -1,8 +1,9 @@
 from serial import Serial
-from helpers import DeviceInformation
-from led_chksums import led_chksums
-from helpers import parse_capture
-from bluetooth import get_paired_devices, connect_socket
+
+from .bluetooth import connect_socket, get_paired_devices
+from .helpers import DeviceInformation, parse_capture
+from .led_chksums import led_chksums
+
 
 class Unicorn():
 
@@ -30,8 +31,6 @@ class Unicorn():
                 else:
                     self._serial = connect_socket(mac)
                 print(f'Connected to {name} ({mac}) {port or ''}')
-
-
 
 
     def close(self):
@@ -81,5 +80,5 @@ class Unicorn():
         return data
     
     def SetDigitalOutputs(self, data: int):
-        self._serial.write([0x6a, data, *led_chksums[data]])
+        self._serial.write(bytes([0x6a, data, *led_chksums[data]]))
         self._serial.flush()
