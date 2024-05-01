@@ -12,7 +12,7 @@ sudo apt install python3-serial python3-gi python3-gi-cairo gir1.2-gtk-4.0
 ```
 #### Windows
 - Python (with pip)
-- `pip install pywin32`
+- `pip install pyserial pywin32`
 
 ## Usage
 
